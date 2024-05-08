@@ -45,11 +45,11 @@ class ChatGPTTelegramBot:
             # BotCommand(command='resend', description=localized_text('resend_description', bot_language))
         ]
         # If imaging is enabled, add the "image" command to the list
-        if self.config.get('enable_image_generation', False):
-            self.commands.append(BotCommand(command='image', description=localized_text('image_description', bot_language)))
+        # if self.config.get('enable_image_generation', False):
+        #     self.commands.append(BotCommand(command='image', description=localized_text('image_description', bot_language)))
 
-        if self.config.get('enable_tts_generation', False):
-            self.commands.append(BotCommand(command='tts', description=localized_text('tts_description', bot_language)))
+        # if self.config.get('enable_tts_generation', False):
+        #     self.commands.append(BotCommand(command='tts', description=localized_text('tts_description', bot_language)))
 
         self.group_commands = [BotCommand(
             command='chat', description=localized_text('chat_description', bot_language)
@@ -72,9 +72,9 @@ class ChatGPTTelegramBot:
                 '\n\n' +
                 '\n'.join(commands_description) +
                 '\n\n' +
-                localized_text('help_text', bot_language)[1] +
-                '\n\n' +
-                localized_text('help_text', bot_language)[2]
+                localized_text('help_text', bot_language)[1] # +
+                # '\n\n' +
+                # localized_text('help_text', bot_language)[2]
         )
         await update.message.reply_text(help_text, disable_web_page_preview=True)
 
