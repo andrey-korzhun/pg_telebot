@@ -67,9 +67,8 @@ class ChatGPTTelegramBot:
         commands = self.group_commands if is_group_chat(update) else self.commands
         commands_description = [f'/{command.command} - {command.description}' for command in commands]
         bot_language = self.config['bot_language']
-        bold_text = 'Привет! Я Софи, AI-психолог для пар.'
         help_text = (
-                f'*{bold_text}* Бета-версия.' +
+                f'*Привет! Я Софи, AI-психолог для пар.* Бета-версия.' +
                 '\n\n' +
                 'Я помогу найти ответы на важные вопросы, преодолеть сложности и сохранить отношения. Ты можешь обратиться ко мне один или с партнером.' +
                 '\n\n' +
@@ -89,7 +88,8 @@ class ChatGPTTelegramBot:
         #         # '\n\n' +
         #         # localized_text('help_text', bot_language)[2]
         # )
-        await update.message.reply_text(help_text, disable_web_page_preview=True)
+        await update.message.reply_text(help_text, disable_web_page_preview=True,
+                                        parse_mode=constants.ParseMode.MARKDOWN)
 
     async def stats(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """
