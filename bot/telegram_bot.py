@@ -55,31 +55,17 @@ class ChatGPTTelegramBot:
     async def help(self, update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
         """
         Shows the help menu.
+        '\n'.join(commands_description)
         """
         commands = self.group_commands if is_group_chat(update) else self.commands
         commands_description = [f'/{command.command} - {command.description}' for command in commands]
         bot_language = self.config['bot_language']
         help_text = (
-                f'*Привет! Я Софи, AI-психолог для пар.* Бета-версия.' +
-                '\n\n' +
-                'Я помогу найти ответы на важные вопросы, преодолеть сложности и сохранить отношения. Ты можешь обратиться ко мне один или с партнером.' +
-                '\n\n' +
-                u'\N{check mark}' + 'Безопасно и конфиденциально\n' +
-                u'\N{check mark}' + 'В любое время дня и ночи\n' +
-                u'\N{check mark}' + 'Текстом и голосом\n' +
-                '\n' +
-                'Продолжая диалог, ты соглашаешься с правилами: #правила'
+                'Для обсуждения способов сохранения отношений при возникновении конфликтов, выбери /save' +
+                '\n\n'
+                'Для активации безлимитного доступа на 7 дней за 200 рублей, обратись к @AKorzhun'
         )
 
-        # help_text = (
-        #         localized_text('help_text', bot_language)[0] +
-        #         '\n\n' +
-        #         '\n'.join(commands_description) +
-        #         '\n\n' +
-        #         localized_text('help_text', bot_language)[1] # +
-        #         # '\n\n' +
-        #         # localized_text('help_text', bot_language)[2]
-        # )
         await update.message.reply_text(help_text, disable_web_page_preview=True,
                                         parse_mode=constants.ParseMode.MARKDOWN)
 
