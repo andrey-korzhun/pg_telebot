@@ -67,8 +67,9 @@ class ChatGPTTelegramBot:
         commands = self.group_commands if is_group_chat(update) else self.commands
         commands_description = [f'/{command.command} - {command.description}' for command in commands]
         bot_language = self.config['bot_language']
+        bold_text = 'Привет! Я Софи, AI-психолог для пар.'
         help_text = (
-                f'*Привет! Я Софи, AI-психолог для пар.* Бета-версия.' +
+                f'*{bold_text}* Бета-версия.' +
                 '\n\n' +
                 'Я помогу найти ответы на важные вопросы, преодолеть сложности и сохранить отношения. Ты можешь обратиться ко мне один или с партнером.' +
                 '\n\n' +
