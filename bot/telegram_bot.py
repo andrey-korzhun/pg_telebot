@@ -53,44 +53,21 @@ class ChatGPTTelegramBot:
         self.inline_queries_cache = {}
 
     async def help(self, update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
-        keyboard = [
-        [
-            InlineKeyboardButton("Option 1", callback_data="1"),
-            InlineKeyboardButton("Option 2", callback_data="2"),
-        ],
-        [InlineKeyboardButton("Option 3", callback_data="3")],
-    ]
+        """
+        Shows the help menu.
+        '\n'.join(commands_description)
+        """
+        commands = self.group_commands if is_group_chat(update) else self.commands
+        commands_description = [f'/{command.command} - {command.description}' for command in commands]
+        bot_language = self.config['bot_language']
+        help_text = (
+                'Для обсуждения способов сохранения отношений при возникновении конфликтов, выбери /save' +
+                '\n\n'
+                'Для активации безлимитного доступа на 7 дней за 200 рублей, обратись к @AKorzhun'
+        )
 
-        reply_markup = InlineKeyboardMarkup(keyboard)
-
-        await update.message.reply_text("Please choose:", reply_markup=reply_markup)
-
-    async def button(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
-        """Parses the CallbackQuery and updates the message text."""
-        query = update.callback_query
-
-        # CallbackQueries need to be answered, even if no notification to the user is needed
-        # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
-        await query.answer()
-
-        await query.edit_message_text(text=f"Selected option: {query.data}")
-
-
-        # """
-        # Shows the help menu.
-        # '\n'.join(commands_description)
-        # """
-        # commands = self.group_commands if is_group_chat(update) else self.commands
-        # commands_description = [f'/{command.command} - {command.description}' for command in commands]
-        # bot_language = self.config['bot_language']
-        # help_text = (
-        #         'Для обсуждения способов сохранения отношений при возникновении конфликтов, выбери /save' +
-        #         '\n\n'
-        #         'Для активации безлимитного доступа на 7 дней за 200 рублей, обратись к @AKorzhun'
-        # )
-
-        # await update.message.reply_text(help_text, disable_web_page_preview=True,
-        #                                 parse_mode=constants.ParseMode.MARKDOWN)
+        await update.message.reply_text(help_text, disable_web_page_preview=True,
+                                        parse_mode=constants.ParseMode.MARKDOWN)
 
     async def stats(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """
@@ -187,6 +164,7 @@ class ChatGPTTelegramBot:
                 f"{localized_text(budget_period, bot_language)}: "
                 f"${remaining_budget:.2f}.\n"
             )
+
 
         usage_text = text_current_conversation + text_today + text_month + text_budget
         await update.message.reply_text(usage_text, parse_mode=constants.ParseMode.MARKDOWN)
@@ -1062,7 +1040,7 @@ class ChatGPTTelegramBot:
             .post_init(self.post_init) \
             .concurrent_updates(True) \
             .build()
-        
+
         application.add_handler(CommandHandler('save', self.reset))
         application.add_handler(CommandHandler('pay', self.help))
         # application.add_handler(CommandHandler('tts', self.tts))
@@ -1083,7 +1061,6 @@ class ChatGPTTelegramBot:
             constants.ChatType.GROUP, constants.ChatType.SUPERGROUP, constants.ChatType.PRIVATE
         ]))
         application.add_handler(CallbackQueryHandler(self.handle_callback_inline_query))
-        application.add_handler(CallbackQueryHandler(self.button))
 
         application.add_error_handler(error_handler)
 
