@@ -68,7 +68,7 @@ class ChatGPTTelegramBot:
         commands_description = [f'/{command.command} - {command.description}' for command in commands]
         bot_language = self.config['bot_language']
         help_text = (
-                '*Привет! Я Софи, AI-психолог для пар.* Бета-версия.'
+                '<b>Привет! Я Софи, AI-психолог для пар.</b> Бета-версия.'
         )
 
         # help_text = (
