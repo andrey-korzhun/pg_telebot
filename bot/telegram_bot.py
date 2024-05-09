@@ -68,15 +68,15 @@ class ChatGPTTelegramBot:
         commands_description = [f'/{command.command} - {command.description}' for command in commands]
         bot_language = self.config['bot_language']
         help_text = (
-                'Привет! Я Софи, AI-психолог для пар. Бета-версия.'
-                # '\n' +
-                # 'Я помогу найти ответы на важные вопросы, преодолеть сложности и сохранить отношения. Ты можешь обратиться ко мне один или с партнером.' +
-                # '\n' +
-                # 'v Безопасно и конфиденциально\n' +
-                # 'v В любое время дня и ночи\n' +
-                # 'v Текстом и голосом\n' +
-                # '\n' +
-                # 'Продолжая диалог, ты соглашаешься с правилами: [#правила]'
+                'Привет! Я Софи, AI-психолог для пар. Бета-версия.' +
+                '\n' +
+                'Я помогу найти ответы на важные вопросы, преодолеть сложности и сохранить отношения. Ты можешь обратиться ко мне один или с партнером.' +
+                '\n' +
+                u'\N{check mark}' + 'Безопасно и конфиденциально\n' +
+                u'\N{check mark}' + 'В любое время дня и ночи\n' +
+                u'\N{check mark}' + 'Текстом и голосом\n' +
+                '\n' +
+                'Продолжая диалог, ты соглашаешься с правилами: #правила'
         )
 
         # help_text = (
@@ -88,7 +88,7 @@ class ChatGPTTelegramBot:
         #         # '\n\n' +
         #         # localized_text('help_text', bot_language)[2]
         # )
-        await update.message.reply_text(help_text, disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN_V2)
+        await update.message.reply_text(help_text, disable_web_page_preview=True)
 
     async def stats(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """
