@@ -57,17 +57,15 @@ class ChatGPTTelegramBot:
         Shows the help menu.
         '\n'.join(commands_description)
         """
-        commands = self.group_commands if is_group_chat(update) else self.commands
-        commands_description = [f'/{command.command} - {command.description}' for command in commands]
-        bot_language = self.config['bot_language']
-        help_text = (
-                'Для обсуждения способов сохранения отношений при возникновении конфликтов, выбери /save' +
-                '\n\n'
-                'Для активации безлимитного доступа на 7 дней за 200 рублей, обратись к @AKorzhun'
-        )
 
-        await update.message.reply_text(help_text, disable_web_page_preview=True,
-                                        parse_mode=constants.ParseMode.MARKDOWN)
+        logging.info(f'Showing the pay button for user {update.message.from_user.name} '
+                     f'(id: {update.message.from_user.id})...')
+        
+        reply_markup = InlineKeyboardMarkup([[
+                    InlineKeyboardButton(text=f'ОПЛАТИТЬ',
+                                          url='https://www.tinkoff.ru/cf/dKjnn6Esq4', pay=True)]])
+        
+        await update.message.reply_text("Пробный период на 7 дней за 200р", reply_markup=reply_markup)
 
     async def stats(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """
