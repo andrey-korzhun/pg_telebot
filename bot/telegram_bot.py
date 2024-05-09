@@ -68,10 +68,10 @@ class ChatGPTTelegramBot:
         commands_description = [f'/{command.command} - {command.description}' for command in commands]
         bot_language = self.config['bot_language']
         help_text = (
-                'Привет! Я Софи, AI-психолог для пар. Бета-версия.' +
-                '\n' +
+                f'*Привет! Я Софи, AI-психолог для пар.* Бета-версия.' +
+                '\n\n' +
                 'Я помогу найти ответы на важные вопросы, преодолеть сложности и сохранить отношения. Ты можешь обратиться ко мне один или с партнером.' +
-                '\n' +
+                '\n\n' +
                 u'\N{check mark}' + 'Безопасно и конфиденциально\n' +
                 u'\N{check mark}' + 'В любое время дня и ночи\n' +
                 u'\N{check mark}' + 'Текстом и голосом\n' +
