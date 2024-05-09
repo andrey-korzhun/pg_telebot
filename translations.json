@@ -49,8 +49,8 @@
         "function_unavailable_in_inline_mode": "This function is unavailable in inline mode"
     },
     "ru": {
-        "help_description":"Показать справочное сообщение",
-        "reset_description":"Диагностика проблем в отношениях",
+        "help_description":"Оформить подписку",
+        "reset_description":"Хочу сохранить отношения, но у нас часто возникают конфликты.",
         "image_description":"Создать изображение по запросу (например, /image кошка)",
         "tts_description":"Создать речь из текста (например, /tts мой дом)",
         "stats_description":"Получить статистику использования",
