@@ -65,7 +65,7 @@ class ChatGPTTelegramBot:
 
         await update.message.reply_text("Please choose:", reply_markup=reply_markup)
 
-    async def button(self, update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
+    async def button(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
         """Parses the CallbackQuery and updates the message text."""
         query = update.callback_query
 
