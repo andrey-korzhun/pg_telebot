@@ -1039,10 +1039,11 @@ class ChatGPTTelegramBot:
             .concurrent_updates(True) \
             .build()
 
-        application.add_handler(CommandHandler('save', self.reset))
+        # application.add_handler(CommandHandler('save', self.reset))
+        application.add_handler(CommandHandler('start', self.reset))
         application.add_handler(CommandHandler('pay', self.help))
         # application.add_handler(CommandHandler('tts', self.tts))
-        application.add_handler(CommandHandler('start', self.help))
+        # application.add_handler(CommandHandler('start', self.help))
         application.add_handler(CommandHandler('stats', self.stats))
         application.add_handler(CommandHandler(
             'chat', self.prompt, filters=filters.ChatType.GROUP | filters.ChatType.SUPERGROUP)
