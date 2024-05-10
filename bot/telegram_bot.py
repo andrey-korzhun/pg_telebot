@@ -63,7 +63,7 @@ class ChatGPTTelegramBot:
         
         reply_markup = InlineKeyboardMarkup([[
                     InlineKeyboardButton(text=f'ОПЛАТИТЬ',
-                                          url='https://www.tinkoff.ru/cf/dKjnn6Esq4', pay=True)]])
+                                          url='https://bit.ly/sofi_trial', pay=True)]])
         
         await update.message.reply_text("Пробный период на 7 дней за 200р", reply_markup=reply_markup)
 
@@ -205,7 +205,7 @@ class ChatGPTTelegramBot:
             await self.send_disallowed_message(update, context)
             return
 
-        logging.info(f'Resetting the conversation for user {update.message.from_user.name} '
+        logging.info(f'Save for user {update.message.from_user.name} '
                      f'(id: {update.message.from_user.id})...')
 
         chat_id = update.effective_chat.id
