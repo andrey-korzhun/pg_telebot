@@ -63,7 +63,7 @@ class ChatGPTTelegramBot:
         
         reply_markup = InlineKeyboardMarkup([[
                     InlineKeyboardButton(text=f'ОПЛАТИТЬ',
-                                          url='https://bit.ly/sofi_trial', pay=True)]])
+                                          url='https://rebrand.ly/vmeste_sofi', pay=True)]])
         
         await update.message.reply_text("Пробный период на 7 дней за 200р", reply_markup=reply_markup)
 
