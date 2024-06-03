@@ -61,10 +61,10 @@ class ChatGPTTelegramBot:
                      f'(id: {update.message.from_user.id})...')
         
         reply_markup = InlineKeyboardMarkup([[
-                    InlineKeyboardButton(text=f'ОПЛАТИТЬ',
+                    InlineKeyboardButton(text=f'ЗАДОНАТИТЬ',
                                           url='https://tinyurl.com/paysofi', pay=True)]])
         
-        await update.message.reply_text("Пробный период на 7 дней за 200р", reply_markup=reply_markup)
+        await update.message.reply_text("Любой донат на оплату токенов", reply_markup=reply_markup)
 
     async def reset(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """
